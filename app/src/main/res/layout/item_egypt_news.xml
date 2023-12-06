@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="@dimen/_250sdp"
+    android:layout_height="@dimen/_175sdp"
+    android:backgroundTint="@color/navy_blue"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginHorizontal="@dimen/_3sdp"
+    android:elevation="@dimen/_20sdp"
+    app:cardCornerRadius="@dimen/_15sdp">
+   <androidx.constraintlayout.widget.ConstraintLayout
+       android:layout_width="match_parent"
+       android:layout_height="match_parent">
+
+       <com.google.android.material.imageview.ShapeableImageView
+           android:id="@+id/image"
+           android:layout_width="match_parent"
+           android:layout_height="match_parent"
+           android:scaleType="centerCrop"
+           />
+       <com.google.android.material.textview.MaterialTextView
+           android:id="@+id/time"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:ems="10"
+           android:inputType="textMultiLine"
+           app:layout_constraintTop_toTopOf="@id/image"
+           app:layout_constraintLeft_toLeftOf="@id/image"
+           android:textSize="@dimen/_10sdp"
+           android:textStyle="bold"
+           android:textColor="@color/white"
+           android:text="20 minute ago"
+           android:layout_margin="@dimen/_10sdp"
+           />
+
+       <com.google.android.material.checkbox.MaterialCheckBox
+           android:id="@+id/imageButton"
+           android:layout_width="@dimen/_20sdp"
+           android:layout_height="@dimen/_20sdp"
+           android:layout_margin="@dimen/_10sdp"
+           android:layout_marginTop="@dimen/_10sdp"
+           android:layout_marginEnd="@dimen/_10sdp"
+           android:background="@drawable/cheakbox"
+           android:button="@null"
+           app:layout_constraintRight_toRightOf="@id/image"
+           app:layout_constraintTop_toTopOf="@id/image" />
+       <com.google.android.material.textview.MaterialTextView
+           android:id="@+id/title"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:ems="8"
+           android:inputType="textMultiLine"
+           android:maxLines="3"
+           app:layout_constraintBottom_toBottomOf="@id/image"
+           app:layout_constraintLeft_toLeftOf="@id/image"
+           android:textSize="@dimen/_20sdp"
+           android:textStyle="bold"
+           android:textColor="@color/white"
+           android:text=" test  headline test  "
+           android:layout_margin="@dimen/_10sdp"
+           />
+   </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>

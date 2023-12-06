@@ -1,15 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SearchFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.SearchFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:textSize="@dimen/_30ssp"
-        android:text="SearchFragment" />
+   <com.google.android.material.textfield.TextInputEditText
+       android:id="@+id/search"
+       android:layout_width="0dp"
+       android:layout_height="@dimen/_30sdp"
+       app:layout_constraintTop_toTopOf="parent"
+       app:layout_constraintStart_toStartOf="parent"
+       android:background="@drawable/background_search"
+       android:hint="@string/search_edit"
+       android:layout_margin="@dimen/_5sdp"
+       android:padding="@dimen/_5sdp"
+       app:layout_constraintEnd_toStartOf="@id/searchButton"
+       />
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/searchButton"
+        android:layout_width="@dimen/_30sdp"
+        android:layout_height="@dimen/_30sdp"
+        android:layout_margin="@dimen/_5sdp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:src="@drawable/baseline_search_24"
+        android:background="@drawable/search_background"/>
+          <androidx.recyclerview.widget.RecyclerView
+              android:layout_width=""
+              android:layout_height=""
 
-</FrameLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

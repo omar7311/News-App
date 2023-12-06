@@ -7,22 +7,44 @@
 
     <fragment
         android:id="@+id/home"
-        android:name="com.example.newsapp.HomeFragment"
-        android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        android:name="com.example.newsapp.ui.HomeFragment"
+        android:label="Home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_home_to_newsDetailsFragment"
+            app:destination="@id/newsDetailsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/search"
-        android:name="com.example.newsapp.SearchFragment"
-        android:label="fragment_search"
-        tools:layout="@layout/fragment_search" />
+        android:name="com.example.newsapp.ui.SearchFragment"
+        android:label="Search"
+        tools:layout="@layout/fragment_search" >
+        <action
+            android:id="@+id/action_search_to_newsDetailsFragment"
+            app:destination="@id/newsDetailsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/bookmark"
-        android:name="com.example.newsapp.BookmarkFragment"
-        android:label="fragment_bookmark"
-        tools:layout="@layout/fragment_bookmark" />
+        android:name="com.example.newsapp.ui.BookmarkFragment"
+        android:label="Bookmark"
+        tools:layout="@layout/fragment_bookmark" >
+
+        <action
+            android:id="@+id/action_bookmark_to_newsDetailsFragment2"
+            app:destination="@id/newsDetailsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/setting"
-        android:name="com.example.newsapp.SettingFragment"
-        android:label="fragment_setting"
+        android:name="com.example.newsapp.ui.SettingFragment"
+        android:label="Setting"
         tools:layout="@layout/fragment_setting" />
+    <fragment
+        android:id="@+id/newsDetailsFragment"
+        android:name="com.example.newsapp.NewsDetailsFragment"
+        android:label="fragment_news_details"
+        tools:layout="@layout/fragment_news_details" >
+        <argument
+            android:name="news"
+            app:argType="com.example.newsapp.data.model.ArticlesItem" />
+    </fragment>
 </navigation>

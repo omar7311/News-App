@@ -20,7 +20,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(),LatestNewsAdapter.NewsAction {
     lateinit var binding: FragmentHomeBinding
     lateinit var adapter1: EgyptNewsAdapter
     lateinit var adapter2: LatestNewsAdapter
@@ -35,9 +35,16 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding=FragmentHomeBinding.bind(view)
-        init()
+       init()
        getEgyptNews()
         getLatestNews()
+    }
+    fun init() {
+        adapter1= EgyptNewsAdapter()
+        adapter2= LatestNewsAdapter(this)
+        binding.recycleView2.layoutManager=LinearLayoutManager(context)
+        binding.recycleView1.layoutManager=LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false)
+
     }
 
     private fun getLatestNews() {
@@ -58,12 +65,7 @@ class HomeFragment : Fragment() {
                 })
     }
 
-    fun init(){
-        adapter1= EgyptNewsAdapter()
-        adapter2= LatestNewsAdapter()
-        binding.recycleView2.layoutManager=LinearLayoutManager(context)
-        binding.recycleView1.layoutManager=LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false)
-    }
+
     fun getEgyptNews(){
       RetrofitClient.getWebServices()
           .getCountryNews("eg",getString(R.string.api_Key))
@@ -80,6 +82,11 @@ class HomeFragment : Fragment() {
           })
 
    }
+
+    override fun newsClicked(news: ArticlesItem) {
+        Navigation.findNavController(binding.root)
+            .navigate(HomeFragmentDirections.actionHomeToNewsDetailsFragment(news))
+    }
 
 
 }

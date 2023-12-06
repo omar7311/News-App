@@ -6,6 +6,8 @@
     android:layout_height="@dimen/_175sdp"
     android:backgroundTint="@color/navy_blue"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:clickable="true"
+    android:focusable="true"
     android:layout_marginHorizontal="@dimen/_3sdp"
     android:elevation="@dimen/_20sdp"
     app:cardCornerRadius="@dimen/_15sdp">

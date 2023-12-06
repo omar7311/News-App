@@ -10,7 +10,7 @@ import com.example.newsapp.data.model.ArticlesItem
 import com.example.newsapp.databinding.LatestNewsItemBinding
 import com.example.newsapp.ui.HomeFragmentDirections
 
-class LatestNewsAdapter:RecyclerView.Adapter<LatestNewsAdapter.NewsHolder>() {
+class LatestNewsAdapter(var news: NewsAction):RecyclerView.Adapter<LatestNewsAdapter.NewsHolder>() {
     private lateinit var list: ArrayList<ArticlesItem>
     fun addList(list: ArrayList<ArticlesItem>) {
         this.list =list
@@ -37,9 +37,12 @@ class LatestNewsAdapter:RecyclerView.Adapter<LatestNewsAdapter.NewsHolder>() {
     inner class NewsHolder(val binding: LatestNewsItemBinding): RecyclerView.ViewHolder(binding.root) {
 init {
     binding.root.setOnClickListener {
-        Navigation.findNavController(binding.root)
-            .navigate(HomeFragmentDirections.actionHomeToNewsDetailsFragment(list[layoutPosition]))
+       news.newsClicked(list[layoutPosition])
     }
 }
+    }
+    interface NewsAction {
+        fun newsClicked(news:ArticlesItem)
+
     }
 }

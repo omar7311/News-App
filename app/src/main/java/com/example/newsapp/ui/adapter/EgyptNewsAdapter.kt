@@ -8,10 +8,11 @@ import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.example.newsapp.data.model.ArticlesItem
 import com.example.newsapp.databinding.ItemEgyptNewsBinding
+import com.example.newsapp.ui.BookmarkFragment
 import com.example.newsapp.ui.HomeFragmentDirections
 
 class EgyptNewsAdapter() : RecyclerView.Adapter<EgyptNewsAdapter.NewsHolder>() {
-    private lateinit var list: ArrayList<ArticlesItem>
+    private var list= ArrayList<ArticlesItem>()
 
     fun addList(list: ArrayList<ArticlesItem>) {
         this.list = list
@@ -35,7 +36,7 @@ class EgyptNewsAdapter() : RecyclerView.Adapter<EgyptNewsAdapter.NewsHolder>() {
         holder.binding.image.load(currentItem.urlToImage)
         holder.binding.imageButton.setOnCheckedChangeListener(CompoundButton.OnCheckedChangeListener
         { buttonView, isChecked ->
-
+            if(isChecked){ BookmarkFragment.bookmarkList.add(currentItem) }
         })
     }
 

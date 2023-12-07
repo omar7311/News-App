@@ -1,16 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/orange"
     tools:context=".ui.NewsDetailsFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:textSize="@dimen/_50sdp"
-        android:text="@string/hello_blank_fragment" />
 
-</FrameLayout>
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/image_details"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_200sdp"
+        android:background="@color/navy_blue"
+        android:scaleType="centerCrop"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.checkbox.MaterialCheckBox
+        android:id="@+id/imageButtonDetail"
+        android:layout_width="@dimen/_20sdp"
+        android:layout_height="@dimen/_20sdp"
+        android:layout_margin="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:background="@drawable/cheakbox"
+        android:button="@null"
+        app:layout_constraintRight_toRightOf="@id/image_details"
+        app:layout_constraintTop_toTopOf="@id/image_details" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/title_details"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_5sdp"
+        android:padding="@dimen/_3sdp"
+        android:text="@string/not_available"
+        android:textSize="@dimen/_22ssp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/view"
+        app:layout_constraintTop_toBottomOf="@id/image_details" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/timeDetails"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_10sdp"
+        android:ems="10"
+        android:text="20 minute ago"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_10sdp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/image_details"
+        app:layout_constraintLeft_toLeftOf="@id/image_details" />
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="@dimen/_3sdp"
+        android:layout_height="0dp"
+        android:layout_margin="@dimen/_5sdp"
+        android:background="@color/purple"
+        app:layout_constraintBottom_toBottomOf="@id/title_details"
+        app:layout_constraintEnd_toStartOf="@id/title_details"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/title_details" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/title_details">
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/description"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_margin="@dimen/_5sdp"
+            android:padding="@dimen/_3sdp"
+            android:text="@string/not_available"
+            android:textSize="@dimen/_17sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/title_details" />
+    </ScrollView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -12,7 +12,7 @@
         tools:layout="@layout/fragment_home" >
         <action
             android:id="@+id/action_home_to_newsDetailsFragment"
-            app:destination="@id/newsDetailsFragment" />
+            app:destination="@id/details" />
     </fragment>
     <fragment
         android:id="@+id/search"
@@ -21,7 +21,7 @@
         tools:layout="@layout/fragment_search" >
         <action
             android:id="@+id/action_search_to_newsDetailsFragment"
-            app:destination="@id/newsDetailsFragment" />
+            app:destination="@id/details" />
     </fragment>
     <fragment
         android:id="@+id/bookmark"
@@ -31,7 +31,7 @@
 
         <action
             android:id="@+id/action_bookmark_to_newsDetailsFragment2"
-            app:destination="@id/newsDetailsFragment" />
+            app:destination="@id/details" />
     </fragment>
     <fragment
         android:id="@+id/setting"
@@ -39,9 +39,9 @@
         android:label="Setting"
         tools:layout="@layout/fragment_setting" />
     <fragment
-        android:id="@+id/newsDetailsFragment"
+        android:id="@+id/details"
         android:name="com.example.newsapp.ui.NewsDetailsFragment"
-        android:label="fragment_news_details"
+        android:label="Details"
         tools:layout="@layout/fragment_news_details" >
         <argument
             android:name="news"

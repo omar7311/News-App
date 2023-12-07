@@ -34,8 +34,8 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
-    buildFeatures{
-        viewBinding=true
+    buildFeatures {
+        viewBinding = true
     }
 }
 
@@ -49,15 +49,15 @@ dependencies {
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
     //ssp
-    implementation ("com.intuit.ssp:ssp-android:1.1.0")
+    implementation("com.intuit.ssp:ssp-android:1.1.0")
     //sdp
     implementation("com.intuit.sdp:sdp-android:1.1.0")
     // Kotlin Navigation Component
     val nav_version = "2.7.5"
     implementation("androidx.navigation:navigation-fragment-ktx:$nav_version")
     implementation("androidx.navigation:navigation-ui-ktx:$nav_version")
-     //retrofit
-    implementation ("com.squareup.retrofit2:retrofit:2.9.0")
+    //retrofit
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
     //json
     implementation("com.google.code.gson:gson:2.10.1")
@@ -65,6 +65,6 @@ dependencies {
     implementation("io.coil-kt:coil:2.5.0")
     //coroutines
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
-
-
+    //view Model
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2")
 }

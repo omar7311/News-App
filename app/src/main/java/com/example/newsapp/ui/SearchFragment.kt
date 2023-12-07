@@ -1,5 +1,6 @@
 package com.example.newsapp.ui
 
+import android.app.ProgressDialog
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -16,14 +17,20 @@ import com.example.newsapp.data.source.remote.RetrofitClient
 import com.example.newsapp.databinding.FragmentHomeBinding
 import com.example.newsapp.databinding.FragmentSearchBinding
 import com.example.newsapp.ui.adapter.LatestNewsAdapter
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.withContext
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 
-class SearchFragment : Fragment(),LatestNewsAdapter.NewsAction {
-lateinit var binding: FragmentSearchBinding
-lateinit var adapter: LatestNewsAdapter
+class SearchFragment : Fragment(), NewsAction {
+    lateinit var binding: FragmentSearchBinding
+    lateinit var adapter: LatestNewsAdapter
+    lateinit var dialog: ProgressDialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,37 +47,38 @@ lateinit var adapter: LatestNewsAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding=FragmentSearchBinding.bind(view)
+        binding = FragmentSearchBinding.bind(view)
         init()
         binding.searchButton.setOnClickListener {
-            if(binding.search.text.toString().isNotBlank()){
-             getNews(binding.search.text.toString().toLowerCase().trim())}
+            if (binding.search.text.toString().isNotBlank()) {
+                dialog.show()
+                    getNews(binding.search.text.toString().toLowerCase())
 
+            }
         }
 
     }
+
     fun init() {
-        adapter= LatestNewsAdapter(this)
-        binding.searchRecycleView.layoutManager=LinearLayoutManager(context)
+        dialog = ProgressDialog(context)
+        dialog.setTitle("loading")
+        adapter = LatestNewsAdapter(this)
+        binding.searchRecycleView.layoutManager = LinearLayoutManager(context)
     }
-    fun getNews(query:String){
-        RetrofitClient.getWebServices().getNews(query,getString(R.string.api_Key))
-            .enqueue(object :Callback<NewsResponse>{
-                override fun onResponse(
-                    call: Call<NewsResponse>,
-                    response: Response<NewsResponse>
-                ) {
-                    adapter.addList(response.body()!!.articles as ArrayList<ArticlesItem>)
-                    binding.searchRecycleView.adapter=adapter
+
+    fun getNews(query: String) {
+        GlobalScope.launch(Dispatchers.IO) {
+            val response =
+                RetrofitClient.getWebServices().getNews(query, getString(R.string.api_Key))
+            if (response.isSuccessful) {
+                adapter.addList(response.body()!!.articles as ArrayList<ArticlesItem>)
+                withContext(Dispatchers.Main) {
+                    binding.searchRecycleView.adapter = adapter
+                    dialog.dismiss()
                     binding.search.setText("")
                 }
-
-                override fun onFailure(call: Call<NewsResponse>, t: Throwable) {
-                    TODO("Not yet implemented")
-                }
-
-            })
-
+            }
+        }
     }
 
     override fun newsClicked(news: ArticlesItem) {

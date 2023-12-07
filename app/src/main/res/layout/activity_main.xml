@@ -10,6 +10,7 @@
         android:layout_width="match_parent"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_height="?attr/actionBarSize"
+       app:titleTextColor="@color/white"
         app:title="@string/app_name"
         android:background="?attr/colorPrimary"
         app:titleTextAppearance="@style/TextAppearance.Material3.HeadlineSmall"

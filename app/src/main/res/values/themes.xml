@@ -4,6 +4,10 @@
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
     </style>
-
+    <style name="Theme">
+        <item name="android:statusBarColor">
+            @color/navy_blue
+        </item>
+    </style>
     <style name="Theme.NewsApp" parent="Base.Theme.NewsApp" />
 </resources>

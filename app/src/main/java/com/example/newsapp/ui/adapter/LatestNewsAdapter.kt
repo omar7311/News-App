@@ -8,10 +8,12 @@ import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.example.newsapp.data.model.ArticlesItem
 import com.example.newsapp.databinding.LatestNewsItemBinding
+import com.example.newsapp.ui.BookmarkFragment
 import com.example.newsapp.ui.HomeFragmentDirections
+import com.example.newsapp.ui.NewsAction
 
 class LatestNewsAdapter(var news: NewsAction):RecyclerView.Adapter<LatestNewsAdapter.NewsHolder>() {
-    private lateinit var list: ArrayList<ArticlesItem>
+     var list= ArrayList<ArticlesItem>()
     fun addList(list: ArrayList<ArticlesItem>) {
         this.list =list
     }
@@ -31,6 +33,8 @@ class LatestNewsAdapter(var news: NewsAction):RecyclerView.Adapter<LatestNewsAda
         holder.binding.imageView.load(curentItem.urlToImage)
         holder.binding.imageButtonView.setOnCheckedChangeListener(CompoundButton.OnCheckedChangeListener{
             buttonView, isChecked ->
+            if(isChecked){ BookmarkFragment.bookmarkList.add(curentItem) }
+
         })
 
     }
@@ -41,8 +45,5 @@ init {
     }
 }
     }
-    interface NewsAction {
-        fun newsClicked(news:ArticlesItem)
 
-    }
 }

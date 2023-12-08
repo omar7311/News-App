@@ -16,12 +16,10 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setSupportActionBar(binding.myToolbar)
-        val appBarConfiguration = AppBarConfiguration(setOf(
-            R.id.home,
-            R.id.search,
-            R.id.bookmark,
-            R.id.setting
-        ))
+       setupNavigationBottom()
+    }
+    fun setupNavigationBottom(){
+        val appBarConfiguration = AppBarConfiguration(setOf(R.id.home, R.id.search, R.id.bookmark, R.id.setting))
         val navHostFragment = supportFragmentManager.findFragmentById(binding.fragmentContainer.id) as NavHostFragment
         val navController = navHostFragment.navController
         binding.bottomNavigation.setupWithNavController(navController)

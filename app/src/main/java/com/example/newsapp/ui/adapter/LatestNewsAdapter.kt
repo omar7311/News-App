@@ -3,17 +3,17 @@ package com.example.newsapp.ui.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.CompoundButton
-import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.example.newsapp.data.model.ArticlesItem
 import com.example.newsapp.databinding.LatestNewsItemBinding
-import com.example.newsapp.ui.BookmarkFragment
-import com.example.newsapp.ui.HomeFragmentDirections
-import com.example.newsapp.ui.NewsAction
+import com.example.newsapp.ui.home.HomeIntent
+import com.example.newsapp.ui.MainViewModel
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
-class LatestNewsAdapter(var news: NewsAction):RecyclerView.Adapter<LatestNewsAdapter.NewsHolder>() {
-     var list= ArrayList<ArticlesItem>()
+class LatestNewsAdapter(var mainViewModel: MainViewModel):RecyclerView.Adapter<LatestNewsAdapter.NewsHolder>() {
+    private var list:ArrayList<ArticlesItem>?=null
     fun addList(list: ArrayList<ArticlesItem>) {
         this.list =list
     }
@@ -23,17 +23,22 @@ class LatestNewsAdapter(var news: NewsAction):RecyclerView.Adapter<LatestNewsAda
     }
 
     override fun getItemCount(): Int {
-        return list.size
+        if(list==null) return 0
+        else return list!!.size
     }
 
     override fun onBindViewHolder(holder: NewsHolder, position: Int) {
-        val curentItem=list[position]
+        val curentItem=list!![position]
         holder.binding.titleView.text=curentItem.title
         holder.binding.timeView.text=curentItem.publishedAt
         holder.binding.imageView.load(curentItem.urlToImage)
         holder.binding.imageButtonView.setOnCheckedChangeListener(CompoundButton.OnCheckedChangeListener{
             buttonView, isChecked ->
-            if(isChecked){ BookmarkFragment.bookmarkList.add(curentItem) }
+            if(isChecked){
+                GlobalScope.launch {
+                    mainViewModel.homeChannel.send(HomeIntent.AddBookMark(curentItem))
+                }
+            }
 
         })
 
@@ -41,7 +46,9 @@ class LatestNewsAdapter(var news: NewsAction):RecyclerView.Adapter<LatestNewsAda
     inner class NewsHolder(val binding: LatestNewsItemBinding): RecyclerView.ViewHolder(binding.root) {
 init {
     binding.root.setOnClickListener {
-       news.newsClicked(list[layoutPosition])
+        GlobalScope.launch {
+            mainViewModel.homeChannel.send(HomeIntent.getNewsDetails(list!![layoutPosition]))
+        }
     }
 }
     }

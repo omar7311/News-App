@@ -1,28 +1,31 @@
-package com.example.newsapp.ui
+package com.example.newsapp.ui.bookmark
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.Navigation
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.newsapp.R
 import com.example.newsapp.data.model.ArticlesItem
 import com.example.newsapp.databinding.FragmentBookmarkBinding
-import com.example.newsapp.databinding.FragmentHomeBinding
+import com.example.newsapp.ui.MainViewModel
 import com.example.newsapp.ui.adapter.LatestNewsAdapter
 
 
-class BookmarkFragment : Fragment(),NewsAction {
+class BookmarkFragment : Fragment() {
     lateinit var binding:FragmentBookmarkBinding
     lateinit var adapter: LatestNewsAdapter
-companion object{
+
+    val viewModel  by lazy { ViewModelProvider(this).get(MainViewModel::class.java)}
+
+    companion object{
     var bookmarkList=ArrayList<ArticlesItem>()
 }
     override fun onCreate(savedInstanceState: Bundle?) {
+        viewModel.mainFragment=this
         super.onCreate(savedInstanceState)
-
     }
 
     override fun onCreateView(
@@ -40,14 +43,11 @@ companion object{
         super.onViewCreated(view, savedInstanceState)
     }
     fun init(){
-        adapter= LatestNewsAdapter(this)
+        adapter= LatestNewsAdapter(viewModel)
         binding.recycleView3.adapter=adapter
         binding.recycleView3.layoutManager=LinearLayoutManager(context)
     }
-    override fun newsClicked(news: ArticlesItem) {
-        Navigation.findNavController(binding.root).navigate(BookmarkFragmentDirections
-            .actionBookmarkToNewsDetailsFragment2(news))
-    }
+
 
 
 }

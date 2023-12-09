@@ -1,8 +1,6 @@
 package com.example.newsapp.ui
 
-import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,8 +8,8 @@ import androidx.fragment.app.Fragment
 import coil.load
 import com.example.newsapp.R
 import com.example.newsapp.data.model.ArticlesItem
-import com.example.newsapp.databinding.FragmentBookmarkBinding
 import com.example.newsapp.databinding.FragmentNewsDetailsBinding
+import com.example.newsapp.ui.bookmark.BookmarkFragment
 
 class NewsDetailsFragment : Fragment() {
 lateinit var binding: FragmentNewsDetailsBinding
